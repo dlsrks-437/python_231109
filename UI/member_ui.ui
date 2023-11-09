@@ -65,7 +65,7 @@
    <widget class="QPushButton" name="modify_btn">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>270</x>
       <y>410</y>
       <width>80</width>
       <height>25</height>
@@ -198,6 +198,19 @@
     </property>
     <property name="text">
      <string>나이 :</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="reset_btn">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>410</y>
+      <width>75</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>초기화</string>
     </property>
    </widget>
   </widget>
