@@ -29,6 +29,7 @@ class MainWindow(QMainWindow, form_class):
         cur.execute(sql)  # SQL문 실행
 
         result = cur.fetchone()
+
         if result != None:
             self.password_edit.setText(result[1])
             self.name_edit.setText(result[2])
@@ -53,7 +54,7 @@ class MainWindow(QMainWindow, form_class):
 
         conn = pymysql.connect(host='localhost', user='root', password='12345', db='memberdb')
 
-        sql = (f"UPDATE member SET memberpw = '{memberpw}', name = '{name}', phone = '{phone}', address = '{address}, age = '{age}' WHERE memberid = '{memberid}'")
+        sql = f"UPDATE member SET memberpw = '{memberpw}', name = '{name}', phone = '{phone}', address = '{address}, age = '{age}' WHERE memberid = '{memberid}'"
 
         cur = conn.cursor()  # 커서 생성
         cur.execute(sql)  # SQL문 실행
