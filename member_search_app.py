@@ -51,17 +51,19 @@ class MainWindow(QMainWindow, form_class):
         phone = self.phone_edit.text()
         address = self.address_edit.text()
         age = self.age_edit.text()
+        print('a')
 
         conn = pymysql.connect(host='localhost', user='root', password='12345', db='memberdb')
 
         sql = f"UPDATE member SET memberpw = '{memberpw}', name = '{name}', phone = '{phone}', address = '{address}, age = '{age}' WHERE memberid = '{memberid}'"
-
+        print('b')
         cur = conn.cursor()  # 커서 생성
         cur.execute(sql)  # SQL문 실행
 
         cur.close()
         conn.commit()
         conn.close()
+        print('c')
 
         self.db_search()
 
