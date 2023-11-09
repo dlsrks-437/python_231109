@@ -81,24 +81,26 @@ class MainWindow(QMainWindow, form_class):
     def login(self):
         loginid = self.ID_edit.text()
         loginpw = self.PW_edit.text()
-
         conn = pymysql.connect(host='localhost', user='root', password='12345', db='memberdb')
 
-        sql = f"SELECT * FROM member WHERE memberid = '{loginid}' and memberpw='{loginpw}'"
+        sql = f"SELECT * FROM member WHERE memberid = '{loginid}'"
 
         cur = conn.cursor()  # 커서 생성
         cur.execute(sql)  # SQL문 실행
 
         result = cur.fetchone()
         print(result)
-        print(result[2])
 
-
+        n = 0
 
         if result == None:
-            self.login_text.setText('입력 오류')
+            QMessageBox.warning(self, 'error', '확인되지 않은 아이디')
         else:
-             self.login_text.setText('환영합니다')
+            if loginpw == result[1]:
+                self.login_text.setText(f'환영합니다 {result[2]}님')
+            else:
+                n += 1
+                self.login_text.setText(f'비밀번호 입력 {n}회 오류')
 
         cur.close()
         conn.close()
