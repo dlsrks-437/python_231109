@@ -16,6 +16,7 @@ class MainWindow(QMainWindow, form_class):
 
         self.search_btn.clicked.connect(self.db_search)
         self.modify_btn.clicked.connect(self.db_modify)
+        self.reset_btn.clicked.connect(self.reset)
 
     def db_search(self):
         memberid = self.memberid_edit.text()
@@ -52,16 +53,24 @@ class MainWindow(QMainWindow, form_class):
 
         conn = pymysql.connect(host='localhost', user='root', password='12345', db='memberdb')
 
-        sql = (f"UPDATE member SET memberpw = '{memberpw}', name = '{name}', phone = '{phone}', address = '{address}, age = '{age}' ")
+        sql = (f"UPDATE member SET memberpw = '{memberpw}', name = '{name}', phone = '{phone}', address = '{address}, age = '{age}' WHERE memberid = '{memberid}'")
 
         cur = conn.cursor()  # 커서 생성
         cur.execute(sql)  # SQL문 실행
 
         cur.close()
-        conn.commit()  # insert, delite, update sql문을 사용했을 경우 필수
+        conn.commit()
         conn.close()
 
         self.db_search()
+
+    def reset(self):
+        self.memberid_edit.clear()
+        self.password_edit.clear()
+        self.name_edit.clear()
+        self.phone_edit.clear()
+        self.address_edit.clear()
+        self.age_edit.clear()
 
 
 
